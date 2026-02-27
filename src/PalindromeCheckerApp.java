@@ -10,7 +10,6 @@ public class PalindromeCheckerApp {
         System.out.print("Enter a string: ");
         String input = scanner.nextLine();
         Stack<Character> stack = new Stack<>();
-
         // Push characters into stack
         for (char c : input.toCharArray()) {
             stack.push(c);
