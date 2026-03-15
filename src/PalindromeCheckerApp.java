@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.Deque;
+import java.util.ArrayDeque;
 
 public class PalindromeCheckerApp {
 
@@ -7,32 +9,36 @@ public class PalindromeCheckerApp {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("=================================");
-        System.out.println("   Palindrome Checker - UC4");
+        System.out.println(" Palindrome Checker - UC7");
+        System.out.println(" Deque Based Optimized Approach");
         System.out.println("=================================");
 
-        // Taking input from user
+        // Take input
         System.out.print("Enter a string: ");
         String input = scanner.nextLine();
 
-        // Convert String to Character Array
-        char[] characters = input.toCharArray();
+        // Create Deque
+        Deque<Character> deque = new ArrayDeque<>();
 
-        // Two-pointer approach
-        int start = 0;
-        int end = characters.length - 1;
+        // Insert characters into deque
+        for (int i = 0; i < input.length(); i++) {
+            deque.addLast(input.charAt(i));
+        }
 
         boolean isPalindrome = true;
 
-        while (start < end) {
-            if (characters[start] != characters[end]) {
+        // Remove first & last and compare
+        while (deque.size() > 1) {
+            char front = deque.removeFirst();
+            char rear = deque.removeLast();
+
+            if (front != rear) {
                 isPalindrome = false;
                 break;
             }
-            start++;
-            end--;
         }
 
-        // Display result
+        // Print result
         if (isPalindrome) {
             System.out.println("Result: The given string is a Palindrome.");
         } else {
@@ -41,4 +47,4 @@ public class PalindromeCheckerApp {
 
         scanner.close();
     }
-}
+}}
