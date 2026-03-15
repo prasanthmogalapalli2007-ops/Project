@@ -7,32 +7,15 @@ public class PalindromeCheckerApp {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("=================================");
-        System.out.println("   Palindrome Checker - UC4");
+        System.out.println(" Palindrome Checker - UC9");
+        System.out.println(" Recursive Approach");
         System.out.println("=================================");
 
-        // Taking input from user
         System.out.print("Enter a string: ");
         String input = scanner.nextLine();
 
-        // Convert String to Character Array
-        char[] characters = input.toCharArray();
+        boolean isPalindrome = checkPalindrome(input, 0, input.length() - 1);
 
-        // Two-pointer approach
-        int start = 0;
-        int end = characters.length - 1;
-
-        boolean isPalindrome = true;
-
-        while (start < end) {
-            if (characters[start] != characters[end]) {
-                isPalindrome = false;
-                break;
-            }
-            start++;
-            end--;
-        }
-
-        // Display result
         if (isPalindrome) {
             System.out.println("Result: The given string is a Palindrome.");
         } else {
@@ -40,5 +23,22 @@ public class PalindromeCheckerApp {
         }
 
         scanner.close();
+    }
+
+    // Recursive function
+    public static boolean checkPalindrome(String str, int start, int end) {
+
+        // Base condition
+        if (start >= end) {
+            return true;
+        }
+
+        // If mismatch found
+        if (str.charAt(start) != str.charAt(end)) {
+            return false;
+        }
+
+        // Recursive call
+        return checkPalindrome(str, start + 1, end - 1);
     }
 }
