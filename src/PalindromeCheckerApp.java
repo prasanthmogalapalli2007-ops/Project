@@ -1,29 +1,23 @@
-\import java.util.Scanner;
+import java.util.Scanner;
 
-public class UseCase10PalindromeCheckerApp {
+public class UseCase9PalindromeCheckerApp {
 
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("=================================");
-        System.out.println(" Palindrome Checker - UC10");
-        System.out.println(" Case-Insensitive & Space-Ignored");
+        System.out.println(" Palindrome Checker - UC9");
+        System.out.println(" Recursive Approach");
         System.out.println("=================================");
 
         System.out.print("Enter a string: ");
         String input = scanner.nextLine();
 
-        // Step 1: Normalize string
-        String normalized = input
-                .replaceAll("\\s+", "")   // Remove spaces using regex
-                .toLowerCase();           // Convert to lowercase
-
-        // Step 2: Apply two-pointer logic
-        boolean isPalindrome = checkPalindrome(normalized);
+        boolean isPalindrome = checkPalindrome(input, 0, input.length() - 1);
 
         if (isPalindrome) {
-            System.out.println("Result: The given string is a Palindrome (ignoring case and spaces).");
+            System.out.println("Result: The given string is a Palindrome.");
         } else {
             System.out.println("Result: The given string is NOT a Palindrome.");
         }
@@ -31,19 +25,20 @@ public class UseCase10PalindromeCheckerApp {
         scanner.close();
     }
 
-    public static boolean checkPalindrome(String str) {
+    // Recursive function
+    public static boolean checkPalindrome(String str, int start, int end) {
 
-        int start = 0;
-        int end = str.length() - 1;
-
-        while (start < end) {
-            if (str.charAt(start) != str.charAt(end)) {
-                return false;
-            }
-            start++;
-            end--;
+        // Base condition
+        if (start >= end) {
+            return true;
         }
 
-        return true;
+        // If mismatch found
+        if (str.charAt(start) != str.charAt(end)) {
+            return false;
+        }
+
+        // Recursive call
+        return checkPalindrome(str, start + 1, end - 1);
     }
 }
