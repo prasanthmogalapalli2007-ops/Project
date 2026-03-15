@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.Stack;
 
 public class PalindromeCheckerApp {
 
@@ -7,31 +6,56 @@ public class PalindromeCheckerApp {
 
         Scanner scanner = new Scanner(System.in);
 
+        System.out.println("=================================");
+        System.out.println(" Palindrome Checker - UC11");
+        System.out.println(" Object-Oriented Service Version");
+        System.out.println("=================================");
+
         System.out.print("Enter a string: ");
         String input = scanner.nextLine();
-        Stack<Character> stack = new Stack<>();
-        // Push characters into stack
-        for (char c : input.toCharArray()) {
-            stack.push(c);
-        }
 
-        boolean isPalindrome = true;
+        // Create object of service class
+        PalindromeChecker checker = new PalindromeChecker();
 
-        // Pop and compare
-        for (int i = 0; i < input.length(); i++) {
-            if (input.charAt(i) != stack.pop()) {
-                isPalindrome = false;
-                break;
-            }
-        }
+        boolean result = checker.checkPalindrome(input);
 
-        if (isPalindrome) {
-            System.out.println(input + " is a Palindrome (True)");
+        if (result) {
+            System.out.println("Result: The given string is a Palindrome.");
         } else {
-            System.out.println(input + " is NOT a Palindrome (False)");
+            System.out.println("Result: The given string is NOT a Palindrome.");
         }
 
         scanner.close();
     }
 }
 
+// Service class following OOP principles
+class PalindromeChecker {
+
+    // Public method exposed to user
+    public boolean checkPalindrome(String input) {
+
+        if (input == null) {
+            return false;
+        }
+
+        return isPalindrome(input);
+    }
+
+    // Private internal logic (Encapsulation)
+    private boolean isPalindrome(String str) {
+
+        int start = 0;
+        int end = str.length() - 1;
+
+        while (start < end) {
+            if (str.charAt(start) != str.charAt(end)) {
+                return false;
+            }
+            start++;
+            end--;
+        }
+
+        return true;
+    }
+}
